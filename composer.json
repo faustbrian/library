@@ -1,0 +1,81 @@
+{
+    "name": "cline/archive",
+    "description": "A simplified Laravel media storage package focused on storage and URL generation without conversions",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "laravel",
+        "media",
+        "storage",
+        "files",
+        "uploads",
+        "archive"
+    ],
+    "authors": [
+        {
+            "name": "Brian Faust",
+            "email": "brian@cline.sh"
+        }
+    ],
+    "require": {
+        "php": "^8.4.0",
+        "illuminate/contracts": "^11.0",
+        "illuminate/database": "^11.0",
+        "illuminate/filesystem": "^11.0",
+        "illuminate/support": "^11.0"
+    },
+    "require-dev": {
+        "cline/php-cs-fixer": "^1.0.4",
+        "driftingly/rector-laravel": "^2.0.7",
+        "ergebnis/composer-normalize": "^2.49@dev",
+        "laravel/pint": "^1.25.1",
+        "orchestra/testbench": "^9.0",
+        "pestphp/pest": "^3.8.4",
+        "pestphp/pest-plugin-laravel": "^3.2",
+        "pestphp/pest-plugin-type-coverage": "^3.6.1",
+        "phpstan/phpstan": "^2.1.30",
+        "rector/rector": "^2.2.1",
+        "symfony/var-dumper": "^7.3.4"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Cline\\Archive\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cline\\Archive\\ArchiveServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "lint": "vendor/bin/php-cs-fixer fix",
+        "refactor": "rector",
+        "test": [
+            "@test:lint",
+            "@test:type-coverage",
+            "@test:unit",
+            "@test:types",
+            "@test:refactor"
+        ],
+        "test:lint": "vendor/bin/php-cs-fixer check --diff",
+        "test:refactor": "rector --dry-run",
+        "test:type-coverage": "pest --parallel --exactly=100 --type-coverage",
+        "test:types": "phpstan",
+        "test:unit": "pest --parallel --exactly=100 --coverage"
+    }
+}
